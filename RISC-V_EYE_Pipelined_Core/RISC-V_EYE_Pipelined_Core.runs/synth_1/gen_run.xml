@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1766223624" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/pc_eye.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="system_top_eye_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="system_top_eye.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="system_top_eye_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="system_top_eye_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="system_top_eye_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="system_top_eye.vds"/>
-  <File Type="REPORTS-TCL" Name="system_top_eye_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="system_top_eye_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="system_top_eye.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1766908095" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/pc_eye.dcp">
+  <File Type="VDS-TIMINGSUMMARY" Name="risc_v_eye_top_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="risc_v_eye_top.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="risc_v_eye_top_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="risc_v_eye_top_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="risc_v_eye_top_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="risc_v_eye_top.vds"/>
+  <File Type="REPORTS-TCL" Name="risc_v_eye_top_reports.tcl"/>
+  <File Type="VDS-TIMING-PB" Name="risc_v_eye_top_timing_summary_synth.pb"/>
+  <File Type="PA-TCL" Name="risc_v_eye_top.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/parameters.vh">
@@ -19,13 +19,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/alu_eye.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/bram_eye.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -61,13 +54,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/immediate_extender_eye.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/instruction_memory_eye.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -123,13 +109,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/risc_v_eye_top.sv">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/new/writeback_stage_eye.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -137,8 +116,32 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/risc_v_eye_top.sv">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/bram_eye.sv">
+      <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/system_top_eye.sv">
       <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/instruction_memory_eye.sv">
+      <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -150,9 +153,12 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PPRDIR/../../../../../tools/Xilinx/ip_repo/component.xml">
+      <FileInfo SFType="IPXACT"/>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="system_top_eye"/>
+      <Option Name="TopModule" Val="risc_v_eye_top"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

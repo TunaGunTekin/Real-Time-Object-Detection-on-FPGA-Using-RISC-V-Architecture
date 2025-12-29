@@ -28,10 +28,7 @@ module alu_eye(
 			alu_result_out = src1_in & src2_in;
 			
 			end
-		4'b0011: begin // OR & ORI
-			alu_result_out = src1_in | src2_in;
 			
-			end
 		4'b0011: begin // OR & ORI
 			alu_result_out = src1_in | src2_in;
 			

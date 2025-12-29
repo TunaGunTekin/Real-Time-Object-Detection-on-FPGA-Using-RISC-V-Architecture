@@ -35,31 +35,30 @@ module control_unit_eye(
     output logic        jump_enable_out
     );
 
-   /* always_comb begin
-        // Default values for control signals it prevent latches 
-        imm_extend_op_select_out = 3'b000;
-        alu_src_a_select_out = 1'b0;
-        alu_src_b_select_out = 1'b0;
-        alu_op_select_out = 4'b0000;
-        is_jalr_out = 1'b0;
-        mem_read_enable_out = 1'b0;
-        mem_write_enable_out = 1'b0;
-
-        reg_write_enable_out = 1'b0;
-        result_source_select_out = 2'b00;
-
-        branch_enable_out = 1'b0;
-        jump_enable_out = 1'b0;
-    end */
 
     always_comb begin
+        imm_extend_op_select_out = 3'b000;
+        alu_src_a_select_out     = 1'b0; // Default: Rs1
+        alu_src_b_select_out     = 1'b0; // Default: Rs2
+        alu_op_select_out        = 4'b0000;
+        is_jalr_out              = 1'b0;
+        
+        mem_read_enable_out      = 1'b0;
+        mem_write_enable_out     = 1'b0;
+        mem_to_reg_select_out    = 2'b00;
+        
+        reg_write_enable_out     = 1'b0;
+        result_source_select_out = 2'b00; // Default: ALU Result
+        
+        branch_enable_out        = 1'b0;
+        jump_enable_out          = 1'b0;
         case (opcode_in)
             `OP_LUI : begin
                 // LUI : Rd = Imm.  
                 // LUI: Imm + 0 (Rs1=x0).
                 imm_extend_op_select_out = 3'b100; // U-Type
                 reg_write_enable_out = 1'b1;
-                alu_src_a_select_out = 1'b1; // Rs1 is not used
+                alu_src_a_select_out = 1'b0; // Rs1 is not used
                 alu_src_b_select_out = 1'b1; // Immediate
                 alu_op_select_out = 4'b0000; // ADD operation for LUI
                 //CHECK AGAIN
@@ -76,11 +75,15 @@ module control_unit_eye(
                 // Control signals for AUIPC
             end
             `OP_JAL : begin
+                is_jalr_out = 1'b1;
                 jump_enable_out = 1'b1;
                 imm_extend_op_select_out = 3'b011; // J-Type
                 reg_write_enable_out = 1'b1;
-                // JAL için ALU'ya gerek yok ama hedef adresi Execute Stage PC+Imm ile hesaplar.
-                // WB aşamasında PC+4 yazılır.
+                    
+                // In writeback stage  PC+4 is written to Rd.
+                alu_src_a_select_out = 1'b0; // Rs1 is not used
+                alu_src_b_select_out = 1'b1; // Immediate
+                alu_op_select_out = 4'b0000; // ADD operation for JAL
                 result_source_select_out = 2'b10; // PC + 4
                 //CHECK AGAIN
                 
@@ -109,21 +112,45 @@ module control_unit_eye(
             `OP_BRANCH: begin
                 case (funct3_in)
                     `BRANCH_BEQ: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BEQ
+                        branch_enable_out = 1'b1;
                         // Control signals for BEQ
                     end
                     `BRANCH_BNE: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BNE
+                        branch_enable_out = 1'b1;
                         // Control signals for BNE
                     end
                     `BRANCH_BLT: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BLT
+                        branch_enable_out = 1'b1;
                         // Control signals for BLT
                     end
                     `BRANCH_BGE: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BGE
+                        branch_enable_out = 1'b1;
                         // Control signals for BGE
                     end
                     `BRANCH_BLTU: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BLTU
+                        branch_enable_out = 1'b1;
                         // Control signals for BLTU
                     end
                     `BRANCH_BGEU: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        alu_op_select_out = 4'b0001; // SUB operation for BGEU
+                        branch_enable_out = 1'b1;
                         // Control signals for BGEU
                     end
                     default: begin
@@ -135,18 +162,50 @@ module control_unit_eye(
             `OP_LOAD: begin
                 case (funct3_in)
                     `LOAD_LB: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b1; // Immediate
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for LB
+                        reg_write_enable_out = 1'b1;
+                        result_source_select_out = 2'b01; // ALU result
                         // Control signals for LB
                     end
                     `LOAD_LH: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b1; // Immediate
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for LH
+                        reg_write_enable_out = 1'b1;
+                        result_source_select_out = 2'b01; // ALU result
                         // Control signals for LH
                     end
                     `LOAD_LW: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b1; // Immediate
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for LW
+                        reg_write_enable_out = 1'b1;
+                        result_source_select_out = 2'b01; // ALU result 
                         // Control signals for LW
                     end
                     `LOAD_LBU: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b1; // Immediate
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for LBU
+                        mem_read_enable_out = 1'b1;
+                        reg_write_enable_out = 1'b1;
+                        result_source_select_out = 2'b01; // ALU result
                         // Control signals for LBU
                     end
                     `LOAD_LHU: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b1; // Immediate
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for LHU
+                        mem_read_enable_out = 1'b1;
+                        reg_write_enable_out = 1'b1;
+                        result_source_select_out = 2'b01; // ALU result
                         // Control signals for LHU
                     end
                     default: begin
@@ -157,12 +216,36 @@ module control_unit_eye(
             `OP_STORE: begin
                 case (funct3_in)
                     `STORE_SB: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for SB
+                        mem_write_enable_out = 1'b1;
+                        mem_read_enable_out = 1'b0;
+                        reg_write_enable_out = 1'b0;
+                        result_source_select_out = 2'b11; // ALU result
                         // Control signals for SB
                     end
                     `STORE_SH: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for SH
+                        mem_write_enable_out = 1'b1;
+                        mem_read_enable_out = 1'b0;
+                        reg_write_enable_out = 1'b0;
+                        result_source_select_out = 2'b11; // ALU result
                         // Control signals for SH
                     end
                     `STORE_SW: begin
+                        alu_src_a_select_out = 1'b0; // Rs1
+                        alu_src_b_select_out = 1'b0; // Rs2
+                        imm_extend_op_select_out = 3'b000; // I-Type
+                        alu_op_select_out = 4'b0000; // ADD operation for SW
+                        mem_write_enable_out = 1'b1;
+                        mem_read_enable_out = 1'b0;
+                        reg_write_enable_out = 1'b0;
+                        result_source_select_out = 2'b11; // ALU result
                         // Control signals for SW
                     end
                     default: begin
@@ -176,6 +259,8 @@ module control_unit_eye(
                 alu_src_a_select_out = 1'b0; // Rs1
                 alu_src_b_select_out = 1'b0; // Rs2
                 imm_extend_op_select_out = 3'b000; // I type
+                reg_write_enable_out = 1'b1;
+                result_source_select_out = 2'b11; // ALU result
                 case ({funct7b5_in, funct3_in})
                     `ALU_ADD: begin
                         alu_op_select_out = 4'b0000; // ADD
@@ -224,6 +309,9 @@ module control_unit_eye(
             `OP_ALUI: begin
                 alu_src_a_select_out = 1'b0; // Rs1
                 alu_src_b_select_out = 1'b1; // Immediate
+                reg_write_enable_out = 1'b1;
+                imm_extend_op_select_out = 3'b000; // I type
+                result_source_select_out = 2'b11; // ALU result
                 case (funct3_in)
                     `ALU_ADDI: begin
                         alu_op_select_out = 4'b0000; // ADDI

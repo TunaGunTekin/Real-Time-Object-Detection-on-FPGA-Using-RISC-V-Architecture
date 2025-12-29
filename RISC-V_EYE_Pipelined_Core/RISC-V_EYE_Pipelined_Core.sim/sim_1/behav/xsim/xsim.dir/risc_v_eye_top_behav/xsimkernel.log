@@ -1,0 +1,7 @@
+Running: xsim.dir/risc_v_eye_top_behav/xsimk -simmode gui -wdb risc_v_eye_top_behav.wdb -simrunnum 0 -socket 37425
+Design successfully loaded
+Design Loading Memory Usage: 180448 KB (Peak: 180504 KB)
+Design Loading CPU Usage: 1750 ms
+Simulation completed
+Simulation Memory Usage: 266544 KB (Peak: 319716 KB)
+Simulation CPU Usage: 1920 ms

@@ -61,7 +61,7 @@ module risc_v_eye_top(
 
     //Feedback to Decode
     logic                        reg_write_enable_s_wb;
-    logic [`ADDR_WIDTH-1:0]      read_addr_s_wb;
+    logic [4:0]      read_addr_s_wb;
     logic [`DATA_WIDTH-1:0]      result_wb_s;
 
     //Control Unit to Decode
@@ -142,8 +142,8 @@ module risc_v_eye_top(
     logic                     reg_write_enable_m;
 
     //Memory to MEM-WB Register Signals
-    logic [`DATA_WIDTH-1:0]   read_data_s_m;      // Bellekten okunan ham veri
-    logic [`DATA_WIDTH-1:0]   alu_result_s_m; // Bypass edilen ALU sonucu
+    logic [`DATA_WIDTH-1:0]   read_data_s_m;     
+    logic [`DATA_WIDTH-1:0]   alu_result_s_m; 
     logic [4:0]               rd_addr_s_m;
     logic [`DATA_WIDTH-1:0]   pc_plus_four_s_m;
     logic                     reg_write_enable_s_m;
@@ -165,6 +165,7 @@ module risc_v_eye_top(
    // assign trap_assert_out = 1'b0;
 
     assign pc_source_execute_s= (branch_enable_s_e & zero_flag_s_e) | jump_enable_s_e;
+    assign instruction_memory_addr_out = pc_current_s_f; // 4 byte aligned
 
     (* dont_touch = "true" *)
     hazard_unit_eye hazard_unit_inst (
@@ -175,7 +176,7 @@ module risc_v_eye_top(
     // Inputs from EX Stage
     .rs1_addr_ex_in(rs1_addr_s_e),
     .rs2_addr_ex_in(rs2_addr_s_e),
-    .pc_src_ex_in(pc_src_select_s_e), //BRANCH
+    .pc_src_ex_in(pc_source_execute_s), //BRANCH
 
 
     .mem_read_enable_ex_in(mem_read_enable_s_e), //LOAD
@@ -213,6 +214,7 @@ module risc_v_eye_top(
 
     .stall_in(stall_fetch_s_h),                  // Stall Signal from Hazard Unit   
 
+    .instruction_in(instruction_memory_data_in),                  // Flush Signal from Hazard Unit
     .pc_source_execute_in(pc_source_execute_s),      // Branch Control Signal from Execute Stage
     .pc_target_execute_in(pc_target_s_e),        // Target PC from Execute Stage
 
@@ -249,8 +251,8 @@ module risc_v_eye_top(
 
         // Inputs from IF-ID Register
         .instruction_decode_in(instruction_decode_s_d),
-        .pc_plus_four_in(pc_plus_four_s_d),
-        .pc_current_in(pc_current_s_d),
+        //.pc_plus_four_in(pc_plus_four_s_d),
+        //.pc_current_in(pc_current_s_d),
 
         // Inputs WB Stage for Register File Write Back
         .reg_write_enable_wb_in(reg_write_enable_s_w),
@@ -364,7 +366,7 @@ module risc_v_eye_top(
         .read_data2_in(read_data2_s_e),
         .imm_extended_in(imm_extended_s_e),
         .pc_current_in(pc_current_s_e),
-        .pc_plus_four_in(pc_plus_four_s_e),
+        //.pc_plus_four_in(pc_plus_four_s_e), --- IGNORE ---
         .alu_src_b_select_in(alu_src_b_select_s_e),
         .alu_src_a_select_in(alu_src_a_select_s_e),
         .alu_op_select_in(alu_op_select_s_e),

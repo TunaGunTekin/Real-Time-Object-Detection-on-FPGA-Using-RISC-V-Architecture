@@ -1,0 +1,50 @@
+Vivado Simulator v2024.2.0
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2024.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L secureip --snapshot system_top_eye_func_impl xil_defaultlib.system_top_eye xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.BUFG
+Compiling module unisims_ver.IBUF
+Compiling module unisims_ver.GND
+Compiling module unisims_ver.latchsre_ldce
+Compiling module unisims_ver.LDCE
+Compiling module unisims_ver.LUT5
+Compiling module unisims_ver.LUT6
+Compiling module unisims_ver.x_lut3_mux8
+Compiling module unisims_ver.LUT3
+Compiling module unisims_ver.x_lut2_mux4
+Compiling module unisims_ver.LUT2
+Compiling module unisims_ver.LUT4
+Compiling module xil_defaultlib.control_unit_eye
+Compiling module unisims_ver.MUXF7
+Compiling module unisims_ver.FDCE_default
+Compiling module xil_defaultlib.register_file_eye
+Compiling module xil_defaultlib.decode_stage_eye
+Compiling module xil_defaultlib.pipeline_reg_ex_mem_eye
+Compiling module unisims_ver.CARRY4
+Compiling module xil_defaultlib.alu_eye
+Compiling module xil_defaultlib.execute_stage_eye
+Compiling module unisims_ver.x_lut1_mux2
+Compiling module unisims_ver.LUT1
+Compiling module xil_defaultlib.pc_eye
+Compiling module unisims_ver.latchsre_ldpe
+Compiling module unisims_ver.LDPE
+Compiling module xil_defaultlib.hazard_unit_eye
+Compiling module xil_defaultlib.pipeline_reg_id_ex_eye
+Compiling module xil_defaultlib.pipeline_reg_if_id_eye
+Compiling module xil_defaultlib.pipeline_reg_mem_wb_eye
+Compiling module xil_defaultlib.memory_stage_eye
+Compiling module xil_defaultlib.writeback_stage_eye
+Compiling module xil_defaultlib.risc_v_eye_top
+Compiling module unisims_ver.RB36_INTERNAL_VLOG(READ_WIDTH_A=...
+Compiling module unisims_ver.RAMB36E1(INIT_00=256'b0110001100...
+Compiling module xil_defaultlib.bram_eye
+Compiling module xil_defaultlib.system_top_eye
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot system_top_eye_func_impl

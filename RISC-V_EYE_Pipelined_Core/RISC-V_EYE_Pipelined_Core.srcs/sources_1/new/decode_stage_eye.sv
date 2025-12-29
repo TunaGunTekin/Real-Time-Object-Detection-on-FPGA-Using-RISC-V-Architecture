@@ -15,8 +15,7 @@ module decode_stage_eye(
 
     // Inputs from IF-ID Register
     input logic [`DATA_WIDTH-1:0]  instruction_decode_in,
-    input logic [`DATA_WIDTH-1:0]  pc_plus_four_in,
-    input logic [`DATA_WIDTH-1:0]  pc_current_in,
+    //input logic [`DATA_WIDTH-1:0]  pc_current_in,
 
     // Inputs WB Stage for Register File Write Back
     input logic                    reg_write_enable_wb_in,
@@ -65,7 +64,7 @@ module decode_stage_eye(
     );
 
     immediate_extender_eye immediate_extender_inst (
-        .instruction_in(instruction_decode_in),
+        .instruction_in(instruction_field),
         .op_select_in(imm_source_select_in),
 
         .imm_extended_out(imm_extended_out)

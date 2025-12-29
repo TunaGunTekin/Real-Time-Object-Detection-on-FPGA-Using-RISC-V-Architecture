@@ -1,0 +1,18 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.sim/sim_1/impl/func/xsim/system_top_eye_func_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu_eye
+INFO: [VRFC 10-311] analyzing module bram_eye
+INFO: [VRFC 10-311] analyzing module control_unit_eye
+INFO: [VRFC 10-311] analyzing module decode_stage_eye
+INFO: [VRFC 10-311] analyzing module execute_stage_eye
+INFO: [VRFC 10-311] analyzing module hazard_unit_eye
+INFO: [VRFC 10-311] analyzing module memory_stage_eye
+INFO: [VRFC 10-311] analyzing module pc_eye
+INFO: [VRFC 10-311] analyzing module pipeline_reg_ex_mem_eye
+INFO: [VRFC 10-311] analyzing module pipeline_reg_id_ex_eye
+INFO: [VRFC 10-311] analyzing module pipeline_reg_if_id_eye
+INFO: [VRFC 10-311] analyzing module pipeline_reg_mem_wb_eye
+INFO: [VRFC 10-311] analyzing module register_file_eye
+INFO: [VRFC 10-311] analyzing module risc_v_eye_top
+INFO: [VRFC 10-311] analyzing module system_top_eye
+INFO: [VRFC 10-311] analyzing module writeback_stage_eye
+INFO: [VRFC 10-311] analyzing module glbl

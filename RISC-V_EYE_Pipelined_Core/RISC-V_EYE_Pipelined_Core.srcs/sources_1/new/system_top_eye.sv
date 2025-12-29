@@ -1,8 +1,15 @@
 `timescale 1ns / 1ps
 `include "parameters.vh"
 
-// Bu modülü Vivado'da "Top Module" yapmalısın.
-(* dont_touch = "true" *) // Vivado silmesin diye koruma
+//////////////////////////////////////////////////////////////////////////////////
+// Project Name: RISC-V EYE
+// Description: Real-Time Object Detection on FPGA Using RISC-V Architecture Graduation Project for Hacettepe University Electrical and Electronics Engineering. 
+// File Name: system_top_eye.sv
+// Module: Top Module that integrates Processor Core and Memory (BRAM)
+// Designer: Tuna Gün Tekin
+//////////////////////////////////////////////////////////////////////////////////
+
+(* dont_touch = "true" *) 
 module system_top_eye(
     input logic clk,
     input logic reset
@@ -18,10 +25,10 @@ module system_top_eye(
     logic [31:0] data_wdata;
     logic [31:0] data_rdata;
     logic        data_we;
-    logic        data_re; // BRAM için kullanılmaz ama Core üretiyor
+    logic        data_re; //Read Enable 
 
     // ---------------------------------------------------------
-    // 1. PROCESSOR CORE INSTANCE
+    //  PROCESSOR CORE INSTANCE
     // ---------------------------------------------------------
     risc_v_eye_top core_inst (
         .clk                        (clk),
@@ -33,7 +40,7 @@ module system_top_eye(
 
         // Data Memory Interface
         .data_memory_read_data_in   (data_rdata),
-        .data_memory_ready_in       (1'b1), // BRAM her zaman hazırdır (Stall yok)
+        .data_memory_ready_in       (1'b1), 
         
         .data_memory_write_data_out (data_wdata),
         .data_memory_addr_out       (data_addr),
@@ -42,6 +49,8 @@ module system_top_eye(
 
     );
 
+    assign data_addr_bram = data_addr [11:2]; // BRAM 4KB
+    assign instr_addr_bram = instr_addr [11:2]; // BRAM 4KB
     // ---------------------------------------------------------
     // 2. DUAL PORT BRAM INSTANCE
     // ---------------------------------------------------------
@@ -52,7 +61,6 @@ module system_top_eye(
         .clk(clk),
         
         // PORT A -> Instruction Fetch
-        // İşlemci 0,4,8 üretir. BRAM 0,1,2 ister. Bu yüzden [11:2] alıyoruz.
         .addr_a_in      (instr_addr[11:2]), 
         .read_data_a_out(instr_data),
         

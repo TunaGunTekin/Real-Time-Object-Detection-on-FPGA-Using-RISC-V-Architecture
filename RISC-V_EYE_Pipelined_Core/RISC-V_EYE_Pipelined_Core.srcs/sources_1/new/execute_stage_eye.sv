@@ -15,7 +15,6 @@ module execute_stage_eye(
     input logic [`DATA_WIDTH-1:0]     read_data2_in,
     input logic [`DATA_WIDTH-1:0]     imm_extended_in,
     input logic [`DATA_WIDTH-1:0]     pc_current_in,
-    input logic [`DATA_WIDTH-1:0]     pc_plus_four_in,
 
     input logic                       alu_src_b_select_in,
     input logic                       alu_src_a_select_in,    // 0: Reg(rs1), 1: PC (AUIPC ve JAL için)
@@ -81,10 +80,10 @@ module execute_stage_eye(
 
     assign branch_target_calc = pc_current_in + imm_extended_in;
 
-    // Dallanma (Branch) veya Zıplama (Jump) hedef adresini hesaplar.
+    // Calculate PC Target for Branches and JALR
     assign pc_target_out = (is_jalr_in) ? {alu_result_out[`DATA_WIDTH-1:1], 1'b0} : branch_target_calc;
 
-    // Belleğe yazılacak veri (Store işlemi için)
+    // Data to be written to memory (from forwarded source B)
     assign write_data_out = forwarded_src_b;
 
 

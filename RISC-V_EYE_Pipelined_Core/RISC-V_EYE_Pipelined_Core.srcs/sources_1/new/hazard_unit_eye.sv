@@ -1,14 +1,8 @@
 `timescale 1ns / 1ps
 `include "parameters.vh"
 //////////////////////////////////////////////////////////////////////////////////
-// Project Name: RISC-V EYE
-// Description: Real-Time Object Detection on FPGA Using RISC-V Architecture Graduation Project for Hacettepe University Electrical and Electronics Engineering. 
-// File Name: hazard_unit_eye.sv
-// Module: Hazard Unit 
-// Designer: Tuna Gün Tekin
+// Module: Hazard Unit (Latch Fix Applied)
 //////////////////////////////////////////////////////////////////////////////////
-
-
 
 module hazard_unit_eye(
     // Inputs from Decode Stage
@@ -26,14 +20,13 @@ module hazard_unit_eye(
     // Inputs from MEM Stage
     input logic            reg_write_enable_mem_in,
     input logic[4:0]       rd_addr_mem_in,
-    input logic            mem_stall_mem_in, //STALL from MEM (for load-use hazard)
+    input logic            mem_stall_mem_in, //STALL from MEM
 
     //Inputs from WB Stage
     input logic            reg_write_enable_wb_in,
     input logic[4:0]       rd_addr_wb_in,
 
     // Outputs 
-    // 00: Reg, 01: EX/MEM (Memory), 10: MEM/WB (WB)
     output logic[1:0]        forward_a_select_out,
     output logic[1:0]        forward_b_select_out,  
 
@@ -50,35 +43,34 @@ module hazard_unit_eye(
 
     logic lw_hazard;
 
-    // Forwarding Unit
+    // --- Forwarding Unit A ---
     always_comb begin 
-        // Default value 
-        forward_a_select_out = 2'b00;
+        forward_a_select_out = 2'b00; // Default
         
         if ((reg_write_enable_mem_in == 1'b1) && (rd_addr_mem_in != 5'd0) && 
             (rd_addr_mem_in == rs1_addr_ex_in)) begin
-            forward_a_select_out = 2'b01; // Forward from MEM Stage
+            forward_a_select_out = 2'b01; 
         end else if ((reg_write_enable_wb_in == 1'b1) && (rd_addr_wb_in != 5'd0) && 
                      (rd_addr_wb_in == rs1_addr_ex_in)) begin
-            forward_a_select_out = 2'b10; // Forward from WB Stage
+            forward_a_select_out = 2'b10; 
         end
     end 
 
+    // --- Forwarding Unit B ---
     always_comb begin
-        // Default value
-        forward_b_select_out = 2'b00;
+        forward_b_select_out = 2'b00; // Default
         
         if ((reg_write_enable_mem_in == 1'b1) && (rd_addr_mem_in != 5'd0) && 
             (rd_addr_mem_in == rs2_addr_ex_in)) begin
-            forward_b_select_out = 2'b01; // Forward from MEM Stage
+            forward_b_select_out = 2'b01; 
         end else if ((reg_write_enable_wb_in == 1'b1) && (rd_addr_wb_in != 5'd0) && 
                      (rd_addr_wb_in == rs2_addr_ex_in)) begin
-            forward_b_select_out = 2'b10; // Forward from WB Stage
+            forward_b_select_out = 2'b10; 
         end
     end
 
+    // --- Load-Use Hazard Detection ---
     always_comb begin
-        // Load-Use Hazard Detection
         if ((mem_read_enable_ex_in == 1'b1)  && ((rd_addr_ex_in == rs1_addr_dec_in) || (rd_addr_ex_in == rs2_addr_dec_in))) begin
             lw_hazard = 1'b1;
         end else begin
@@ -86,38 +78,39 @@ module hazard_unit_eye(
         end
     end
     
+    // --- Stall & Flush Control Logic 
     always_comb begin
-        // Default values
-        stall_if_id_out = 1'b0;
-        stall_id_ex_out = 1'b0;
+        // 1. DEFAULT ASSIGNMENTS
+        stall_fetch_out  = 1'b0;
+        stall_if_id_out  = 1'b0;
+        stall_id_ex_out  = 1'b0;
         stall_ex_mem_out = 1'b0;
         stall_mem_wb_out = 1'b0;
 
-        clear_if_id_out = 1'b0;
-        clear_id_ex_out = 1'b0;
+        clear_if_id_out  = 1'b0;
+        clear_id_ex_out  = 1'b0;
         clear_ex_mem_out = 1'b0;
         clear_mem_wb_out = 1'b0;
 
-        if (lw_hazard == 1'b1) begin
-            // Stall the pipeline for Load-Use Hazard
-            stall_fetch_out = 1'b1;
-            stall_if_id_out = 1'b1;
-            stall_id_ex_out = 1'b1;
-
-            clear_id_ex_out = 1'b1; // Insert bubble in EX stage
-
-        end else if (pc_src_ex_in == 1'b1) begin
-            // Branch taken, flush IF-ID and ID-EX
-            clear_if_id_out = 1'b1;
-            clear_id_ex_out = 1'b1;
-
-        end else if (mem_stall_mem_in == 1'b1) begin
-            // Stall due to memory operation in MEM stage
-            stall_fetch_out = 1'b1;
-            stall_if_id_out = 1'b1;
-            stall_id_ex_out = 1'b1;
+        // 2. PRIORITY LOGIC 
+        // Memory stall is the highest priority
+        if (mem_stall_mem_in == 1'b1) begin
+            stall_fetch_out  = 1'b1;
+            stall_if_id_out  = 1'b1;
+            stall_id_ex_out  = 1'b1;
             stall_ex_mem_out = 1'b1;
             stall_mem_wb_out = 1'b1;
+        end 
+        // if Branch taken, clear IF and ID stages
+        else if (pc_src_ex_in == 1'b1) begin
+            clear_if_id_out = 1'b1;
+            clear_id_ex_out = 1'b1;
+        end 
+        // Load-Use Hazar (Bubble)
+        else if (lw_hazard == 1'b1) begin
+            stall_fetch_out = 1'b1;
+            stall_if_id_out = 1'b1;
+            clear_id_ex_out = 1'b1; 
         end
     end
 

@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log system_top_eye.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source system_top_eye.tcl -notrace
+vivado -log risc_v_eye_top.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source risc_v_eye_top.tcl -notrace

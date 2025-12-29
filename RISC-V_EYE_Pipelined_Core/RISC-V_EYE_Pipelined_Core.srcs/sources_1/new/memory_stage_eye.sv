@@ -42,8 +42,8 @@ module memory_stage_eye(
     output logic [1:0]                result_source_select_out
     );
 
-   
-    assign dmem_addr_out         = alu_result_in;
+
+    assign dmem_address_out      = alu_result_in;
     assign dmem_write_data_out   = write_data_in;
     assign dmem_write_enable_out = mem_write_enable_in;
     assign dmem_read_enable_out  = mem_read_enable_in;

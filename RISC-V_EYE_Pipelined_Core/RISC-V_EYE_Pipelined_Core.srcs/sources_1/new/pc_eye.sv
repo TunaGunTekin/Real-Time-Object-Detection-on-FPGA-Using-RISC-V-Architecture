@@ -10,13 +10,14 @@
 
 
 module pc_eye(
-    input  logic                   clk,
-    input  logic                   reset,
+    input logic                   clk,
+    input logic                   reset,
 
     input logic                    stall_in,                  // Stall Signal from Hazard Unit   
 
-    input  logic                   pc_source_execute_in,      // Branch Control Signal from Execute Stage
-    input  logic [`DATA_WIDTH-1:0] pc_target_execute_in,        // Target PC from Execute Stage
+    input logic [`DATA_WIDTH-1:0] instruction_in,                  // Flush Signal from Hazard Unit
+    input logic                   pc_source_execute_in,      // Branch Control Signal from Execute Stage
+    input logic [`DATA_WIDTH-1:0] pc_target_execute_in,        // Target PC from Execute Stage
 
 
     output logic [`DATA_WIDTH-1:0] instruction_fetched_out,    // Instruction fetched from Instruction Memory
@@ -28,13 +29,12 @@ module pc_eye(
 
     assign pc_next = pc_source_execute_in ? pc_target_execute_in : pc_plus_four_out;
     assign pc_plus_four_out = pc_current_out + 32'd4;
+    assign instruction_fetched_out = instruction_in;
 
     always_ff @(posedge clk or posedge reset) begin
         if (reset == 1'b1) begin
             pc_current_out <= '0;
         end else if (stall_in) begin
-            // Hazard Unit "DUR" dediğinde PC değerini koru.
-            // Böylece aynı komut tekrar tekrar fetch edilir (pipeline donar).
             pc_current_out <= pc_current_out; 
         end else begin
             pc_current_out <= pc_next;
