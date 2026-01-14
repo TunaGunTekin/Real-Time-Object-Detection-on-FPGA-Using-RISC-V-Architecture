@@ -6,4 +6,26 @@ Using 8 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.hazard_unit_eye
+Compiling module xil_defaultlib.pc_eye
+Compiling module xil_defaultlib.pipeline_reg_if_id_eye
+Compiling module xil_defaultlib.register_file_eye
+Compiling module xil_defaultlib.immediate_extender_eye
+Compiling module xil_defaultlib.decode_stage_eye
+Compiling module xil_defaultlib.control_unit_eye
+Compiling module xil_defaultlib.pipeline_reg_id_ex_eye
+Compiling module xil_defaultlib.alu_eye
+Compiling module xil_defaultlib.execute_stage_eye
+Compiling module xil_defaultlib.pipeline_reg_ex_mem_eye
+Compiling module xil_defaultlib.memory_stage_eye
+Compiling module xil_defaultlib.pipeline_reg_mem_wb_eye
+Compiling module xil_defaultlib.writeback_stage_eye
+Compiling module xil_defaultlib.risc_v_eye_top
+Compiling module xil_defaultlib.bram_eye
+Compiling module xil_defaultlib.system_top_eye
+Compiling module xil_defaultlib.system_top_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot system_top_tb_behav

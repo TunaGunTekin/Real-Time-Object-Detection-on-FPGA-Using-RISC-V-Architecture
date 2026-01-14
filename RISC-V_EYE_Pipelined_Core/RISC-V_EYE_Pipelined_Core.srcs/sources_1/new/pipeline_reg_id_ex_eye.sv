@@ -34,7 +34,6 @@ module pipeline_reg_id_ex_eye(
     input logic [3:0]                  alu_op_select_in,
     input logic                        mem_read_enable_in,
     input logic                        mem_write_enable_in,
-    input logic  [1:0]                 mem_to_reg_select_in,
     input logic                        reg_write_enable_in,
     input logic                        branch_enable_in,
     input logic                        jump_enable_in,
@@ -57,7 +56,6 @@ module pipeline_reg_id_ex_eye(
     output logic [3:0]                 alu_op_select_out,
     output logic                       mem_read_enable_out,
     output logic                       mem_write_enable_out,
-    output logic [1:0]                 mem_to_reg_select_out,
     output logic                       reg_write_enable_out,
     output logic                       branch_enable_out,
     output logic                       jump_enable_out,
@@ -82,7 +80,6 @@ module pipeline_reg_id_ex_eye(
             alu_op_select_out <= 4'd0;
             mem_read_enable_out <= 1'b0;
             mem_write_enable_out <= 1'b0;
-            mem_to_reg_select_out <= 2'd0;
             reg_write_enable_out <= 1'b0;
             branch_enable_out <= 1'b0;
             jump_enable_out <= 1'b0;
@@ -105,7 +102,6 @@ module pipeline_reg_id_ex_eye(
             alu_op_select_out <= 4'd0;
             mem_read_enable_out <= 1'b0;
             mem_write_enable_out <= 1'b0;
-            mem_to_reg_select_out <= 2'd0;
             reg_write_enable_out <= 1'b0;
             branch_enable_out <= 1'b0;
             jump_enable_out <= 1'b0;
@@ -131,7 +127,6 @@ module pipeline_reg_id_ex_eye(
             alu_op_select_out <= alu_op_select_in;
             mem_read_enable_out <= mem_read_enable_in;
             mem_write_enable_out <= mem_write_enable_in;
-            mem_to_reg_select_out <= mem_to_reg_select_in;
             reg_write_enable_out <= reg_write_enable_in;
             branch_enable_out <= branch_enable_in;
             jump_enable_out <= jump_enable_in;

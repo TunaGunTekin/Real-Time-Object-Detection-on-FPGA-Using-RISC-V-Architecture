@@ -9,10 +9,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-
+(* dont_touch = "true" *)
 module bram_eye #(
     parameter DATA_WIDTH = 32,
-    parameter ADDR_WIDTH = 32
+    parameter ADDR_WIDTH = 10
 )(
     input logic clk,
 
@@ -34,62 +34,73 @@ module bram_eye #(
 
 
     initial begin
-       /* 1. ADDI x1, x0, 5    (x1 = 5)
-        ram[0] = 32'h00500093;
-
-        // 2. ADDI x2, x0, 3    (x2 = 3)
+// --- 1. I-TYPE (Register Hazırlığı) ---
+        // ADDI x1, x0, 10    -> x1 = 10 (0xA)
+        ram[0] = 32'h00A00093;
+        // ADDI x2, x0, 3     -> x2 = 3  (0x3)
         ram[1] = 32'h00300113;
 
-        // 3. ADD x3, x1, x2    (x3 = x1 + x2 = 8)
+        // --- 2. R-TYPE (Aritmetik & Mantık) ---
+        // ADD x3, x1, x2     -> x3 = 10 + 3 = 13 (0xD)
         ram[2] = 32'h002081B3;
-
-        // 4. SUB x4, x1, x2    (x4 = x1 - x2 = 2)
+        // SUB x4, x1, x2     -> x4 = 10 - 3 = 7  (0x7)
         ram[3] = 32'h40208233;
-
-        // 5. OR x5, x1, x2     (x5 = x1 | x2 = 7)
+        // OR  x5, x1, x2     -> x5 = 10 | 3 = 11 (0xB)  (1010 | 0011 = 1011)
         ram[4] = 32'h0020E2B3;
-
-        // 6. AND x6, x1, x2    (x6 = x1 & x2 = 1)
+        // AND x6, x1, x2     -> x6 = 10 & 3 = 2  (0x2)  (1010 & 0011 = 0010)
         ram[5] = 32'h0020F333;
 
-        // 7. SLLI x7, x1, 2    (x7 = x1 << 2 = 20)
-        ram[6] = 32'h00209393;
+        // --- 3. LUI (Load Upper Immediate) ---
+        // LUI x7, 0x12345    -> x7 = 0x12345000
+        ram[6] = 32'h123453B7;
 
-        // 8. ADDI x0, x0, 0     Nop
-
-        ram[7] = 32'h00000013;
-        */
+        // --- 4. STORE & LOAD (Memory Test) ---
+        // Base Adres Hazırlığı: ADDI x8, x0, 256 (0x100)
+        ram[7] = 32'h10000413;
         
-        // 1. ADDI x1, x0, 64   -> x1 = 64 (Memory Address for Load/Store)
-        ram[0] = 32'h04000093;
-
-        // 2. LUI x2, 0xDEADB   -> x2 = 0xDEADB000 (Upper Immediate Load)
-        ram[1] = 32'hDEADB137;
-
-        // 3. ADDI x2, x2, 0xEEF -> x2 = 0xDEADBEEF (Lower Immediate Addition)
-        ram[2] = 32'hEEF10113; 
-        // 4. SW x2, 0(x1)      -> Mem[64] = x2
-        ram[3] = 32'h0020A023;
-
-        // 5. ADDI x2, x0, 0    -> x2 = 0 (Clear x2 to verify Load later)
-        ram[4] = 32'h00000113;
-
-        // 6. LW x3, 0(x1)      -> x3 = Mem[64]
-        // After this instruction, x3 should contain 0xDEADBEEF
-        ram[5] = 32'h0000A183;
+        ram[8] = 32'h00000013; // NOP (ADDI x0, x0, 0)
+        ram[9] = 32'h00000013; // NOP
         
-        // 7. LW x4, 4(x1)      -> x4 = Mem[68] (Should be 0 if not written yet)
-        // This instruction is used to test Load-Use hazard detection.
-        ram[6] = 32'h0040A203;
-
-        // 8. ADD x5, x4, x3    -> x5 = x4 + x3
-        // This instruction depends on the result of the previous Load.
-        // It tests whether the Hazard Unit correctly stalls the pipeline.
-        ram[7] = 32'h003202B3;
-
-        // 9. BEQ x5, x0, LABEL  -> Branch if x5 == 0 (Should not branch)
-        ram[8] = 32'h00000063;
+        // SW x7, 0(x8)       -> Memory[64] = 0x12345000 
+        ram[10] = 32'h00742023;
         
+        // Register Temizliği: ADDI x9, x0, 0
+        ram[11] = 32'h00000493;
+        
+        // LW x9, 0(x8)       -> x9 = Memory[64] (0x12345000 geri okunmalı)
+        // Burada Load-Use veya Memory gecikmesi görülebilir.
+        ram[12] = 32'h00042483;
+        // --- 5. BRANCH (Dallanma) TESTLERİ ---
+        
+        // TEST A: Branch Not Taken (Şart Sağlanmazsa)
+        // BEQ x1, x2, +8     -> 10 == 3 ? Hayır. PC bir sonrakine geçmeli.
+        ram[13] = 32'h00208463;
+        
+        // ADDI x10, x0, 1    -> x10 = 1 (Bu satır ÇALIŞMALI)
+        ram[14] = 32'h00100513;
+
+        // TEST B: Branch Taken (Şart Sağlanırsa)
+        // ADDI x11, x0, 10   -> x11 = 10
+        ram[15] = 32'h00A00593;
+        
+        // BEQ x1, x11, +8    -> 10 == 10 ? Evet. PC+8'e (2 satır atla) git.
+        ram[16] = 32'h00B08463; 
+        
+        // ADDI x12, x0, 99   -> x12 = 99 (Bu satır ATLANMALI / FLUSH EDİLMELİ)
+        ram[17] = 32'h06300613;
+
+        // --- 6. JUMP (Zıplama) TESTLERİ ---
+        
+        // JAL x13, +8        -> x13 = PC+4, PC = PC+8 (1 satır atla)
+        // Hedef: x13'e dönüş adresi yazılmalı, bir sonraki komut atlanmalı.
+        ram[18] = 32'h008006EF;
+
+        // ADDI x14, x0, 88   -> x14 = 88 (Bu satır ATLANMALI / FLUSH EDİLMELİ)
+        ram[19] = 32'h05800713;
+
+        // SON: Sonsuz Döngü (BEQ x0, x0, 0)
+        // Buraya gelindiğinde işlemci aynı satırda takılmalı.
+        ram[20] = 32'h00000063;
         
     end
 

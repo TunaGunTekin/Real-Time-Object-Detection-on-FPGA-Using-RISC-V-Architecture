@@ -20,7 +20,7 @@ module pipeline_reg_ex_mem_eye(
     //Inputs from EX Stage
     input logic                      mem_read_enable_in,
     input logic                      mem_write_enable_in,
-    input logic [1:0]                mem_to_reg_select_in,
+
     input logic                      reg_write_enable_in,
     input logic [1:0]                result_source_select_in,
 
@@ -32,7 +32,6 @@ module pipeline_reg_ex_mem_eye(
     //Outputs to MEM Stage
     output logic                     mem_read_enable_out,
     output logic                     mem_write_enable_out,
-    output logic [1:0]               mem_to_reg_select_out,
     output logic                     reg_write_enable_out,
     output logic [1:0]               result_source_select_out,
 
@@ -47,7 +46,6 @@ module pipeline_reg_ex_mem_eye(
         if (reset == 1'b1) begin
             mem_read_enable_out <= 1'b0;
             mem_write_enable_out <= 1'b0;
-            mem_to_reg_select_out <= 2'b00;
             reg_write_enable_out <= 1'b0;
             result_source_select_out <= 2'b00;
 
@@ -59,7 +57,6 @@ module pipeline_reg_ex_mem_eye(
         end else if (clear_in == 1'b1) begin
             mem_read_enable_out <= 1'b0;
             mem_write_enable_out <= 1'b0;
-            mem_to_reg_select_out <= 2'b00;
             reg_write_enable_out <= 1'b0;
             result_source_select_out <= 2'b00;
 
@@ -74,7 +71,6 @@ module pipeline_reg_ex_mem_eye(
         end else begin
             mem_read_enable_out <= mem_read_enable_in;
             mem_write_enable_out <= mem_write_enable_in;
-            mem_to_reg_select_out <= mem_to_reg_select_in;
             reg_write_enable_out <= reg_write_enable_in;
             result_source_select_out <= result_source_select_in;
 

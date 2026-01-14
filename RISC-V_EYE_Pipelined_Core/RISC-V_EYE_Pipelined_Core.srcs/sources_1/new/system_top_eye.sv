@@ -9,6 +9,8 @@
 // Designer: Tuna Gün Tekin
 //////////////////////////////////////////////////////////////////////////////////
 
+
+
 (* dont_touch = "true" *) 
 module system_top_eye(
     input logic clk,
@@ -19,9 +21,11 @@ module system_top_eye(
 
     // --- Bağlantı Sinyalleri ---
     logic [31:0] instr_addr;
+    logic [9:0]  instr_addr_bram;
     logic [31:0] instr_data;
     
     logic [31:0] data_addr;
+    logic [9:0]  data_addr_bram;
     logic [31:0] data_wdata;
     logic [31:0] data_rdata;
     logic        data_we;
@@ -30,6 +34,7 @@ module system_top_eye(
     // ---------------------------------------------------------
     //  PROCESSOR CORE INSTANCE
     // ---------------------------------------------------------
+    (* dont_touch = "true" *)
     risc_v_eye_top core_inst (
         .clk                        (clk),
         .reset                      (reset),
@@ -54,6 +59,7 @@ module system_top_eye(
     // ---------------------------------------------------------
     // 2. DUAL PORT BRAM INSTANCE
     // ---------------------------------------------------------
+    (* dont_touch = "true" *)
     bram_eye #(
         .DATA_WIDTH(32),
         .ADDR_WIDTH(10) // 10 bit adres (1024 kelime)
@@ -61,12 +67,12 @@ module system_top_eye(
         .clk(clk),
         
         // PORT A -> Instruction Fetch
-        .addr_a_in      (instr_addr[11:2]), 
+        .addr_a_in      (instr_addr_bram), 
         .read_data_a_out(instr_data),
         
         // PORT B -> Data Memory
         .we_b_in        (data_we),
-        .addr_b_in      (data_addr[11:2]),
+        .addr_b_in      (data_addr_bram),
         .write_data_b_in(data_wdata),
         .read_data_b_out(data_rdata)
     );
