@@ -34,13 +34,13 @@ module bram_eye #(
 
 
     initial begin
-// --- 1. I-TYPE (Register Hazırlığı) ---
+// --- 1. I-TYPE 
         // ADDI x1, x0, 10    -> x1 = 10 (0xA)
         ram[0] = 32'h00A00093;
         // ADDI x2, x0, 3     -> x2 = 3  (0x3)
         ram[1] = 32'h00300113;
 
-        // --- 2. R-TYPE (Aritmetik & Mantık) ---
+        // --- 2. R-TYPE 
         // ADD x3, x1, x2     -> x3 = 10 + 3 = 13 (0xD)
         ram[2] = 32'h002081B3;
         // SUB x4, x1, x2     -> x4 = 10 - 3 = 7  (0x7)
@@ -68,38 +68,36 @@ module bram_eye #(
         ram[11] = 32'h00000493;
         
         // LW x9, 0(x8)       -> x9 = Memory[64] (0x12345000 geri okunmalı)
-        // Burada Load-Use veya Memory gecikmesi görülebilir.
+      .
         ram[12] = 32'h00042483;
-        // --- 5. BRANCH (Dallanma) TESTLERİ ---
+        // --- 5. BRANCH 
         
-        // TEST A: Branch Not Taken (Şart Sağlanmazsa)
-        // BEQ x1, x2, +8     -> 10 == 3 ? Hayır. PC bir sonrakine geçmeli.
+        // TEST A: Branch Not Taken 
+        // BEQ x1, x2, +8     -> 10 == 3 ? PC NEXT
         ram[13] = 32'h00208463;
         
-        // ADDI x10, x0, 1    -> x10 = 1 (Bu satır ÇALIŞMALI)
+        // ADDI x10, x0, 1    -> x10 = 1 This line must work
         ram[14] = 32'h00100513;
 
-        // TEST B: Branch Taken (Şart Sağlanırsa)
+        // TEST B: Branch Taken 
         // ADDI x11, x0, 10   -> x11 = 10
         ram[15] = 32'h00A00593;
         
-        // BEQ x1, x11, +8    -> 10 == 10 ? Evet. PC+8'e (2 satır atla) git.
+        // BEQ x1, x11, +8    -> 10 == 10 ? PC+8
         ram[16] = 32'h00B08463; 
         
-        // ADDI x12, x0, 99   -> x12 = 99 (Bu satır ATLANMALI / FLUSH EDİLMELİ)
+        // ADDI x12, x0, 99   -> x12 = 99 (FLUSH)
         ram[17] = 32'h06300613;
 
-        // --- 6. JUMP (Zıplama) TESTLERİ ---
+        // --- 6. JUMP 
         
-        // JAL x13, +8        -> x13 = PC+4, PC = PC+8 (1 satır atla)
-        // Hedef: x13'e dönüş adresi yazılmalı, bir sonraki komut atlanmalı.
+        // JAL x13, +8        -> x13 = PC+4, PC = PC+8 
         ram[18] = 32'h008006EF;
 
-        // ADDI x14, x0, 88   -> x14 = 88 (Bu satır ATLANMALI / FLUSH EDİLMELİ)
+        // ADDI x14, x0, 88   -> x14 = 88 (FLUSH)
         ram[19] = 32'h05800713;
 
-        // SON: Sonsuz Döngü (BEQ x0, x0, 0)
-        // Buraya gelindiğinde işlemci aynı satırda takılmalı.
+        // END : INFINITE LOOP (BEQ x0, x0, 0)
         ram[20] = 32'h00000063;
         
     end
