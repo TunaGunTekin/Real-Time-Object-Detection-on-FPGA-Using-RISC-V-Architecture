@@ -34,7 +34,7 @@ module system_top_tb;
         $display("--- Simülasyon Başladı: Reset bırakıldı ---");
 
         
-     #1000;
+     #305;
 
         $stop; // Simülasyonu durdur
     end

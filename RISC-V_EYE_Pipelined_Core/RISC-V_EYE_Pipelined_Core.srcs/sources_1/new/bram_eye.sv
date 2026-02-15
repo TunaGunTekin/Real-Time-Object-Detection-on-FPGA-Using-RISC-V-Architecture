@@ -61,13 +61,13 @@ module bram_eye #(
         ram[8] = 32'h00000013; // NOP (ADDI x0, x0, 0)
         ram[9] = 32'h00000013; // NOP
         
-        // SW x7, 0(x8)       -> Memory[64] = 0x12345000 
+        // SW x7, 0(x8)       -> Memory[0] = 0x12345000 
         ram[10] = 32'h00742023;
         
         // Register Temizliği: ADDI x9, x0, 0
         ram[11] = 32'h00000493;
         
-        // LW x9, 0(x8)       -> x9 = Memory[64] (0x12345000 geri okunmalı)
+        // LW x9, 0(x8)       -> x9 = Memory[0] (0x12345000 geri okunmalı)
         // Burada Load-Use veya Memory gecikmesi görülebilir.
         ram[12] = 32'h00042483;
         // --- 5. BRANCH (Dallanma) TESTLERİ ---

@@ -1,0 +1,274 @@
+
+*** Running vivado
+    with args -log design_1_RISCV_EYE_CORE_0_1.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_RISCV_EYE_CORE_0_1.tcl
+
+
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Sat Feb 14 15:28:43 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source design_1_RISCV_EYE_CORE_0_1.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/tools/Xilinx/ip_repo'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/tuna-gun/GradProject/RISC-V_EYE/ip_repo/myip_1_0'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.2/data/ip'.
+Command: synth_design -top design_1_RISCV_EYE_CORE_0_1 -part xc7z020clg400-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 54408
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1964.000 ; gain = 419.828 ; free physical = 726 ; free virtual = 10630
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_RISCV_EYE_CORE_0_1' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.gen/sources_1/bd/design_1/ip/design_1_RISCV_EYE_CORE_0_1/synth/design_1_RISCV_EYE_CORE_0_1.v:53]
+INFO: [Synth 8-6157] synthesizing module 'RISCV_EYE_CORE' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/verilog_wrapper.v:3]
+INFO: [Synth 8-6157] synthesizing module 'system_top_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/system_top_eye.sv:15]
+INFO: [Synth 8-6157] synthesizing module 'risc_v_eye_top' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/risc_v_eye_top.sv:13]
+INFO: [Synth 8-6157] synthesizing module 'hazard_unit_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/hazard_unit_eye.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'hazard_unit_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/hazard_unit_eye.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'pc_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pc_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'pc_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pc_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'pipeline_reg_if_id_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_if_id_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_reg_if_id_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_if_id_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'decode_stage_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/decode_stage_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'register_file_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/register_file_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'register_file_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/register_file_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'immediate_extender_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/immediate_extender_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'immediate_extender_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/immediate_extender_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'decode_stage_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/decode_stage_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'control_unit_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/control_unit_eye.sv:12]
+WARNING: [Synth 8-151] case item 3'b101 is unreachable [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/control_unit_eye.sv:310]
+INFO: [Synth 8-226] default block is never used [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/control_unit_eye.sv:310]
+INFO: [Synth 8-6155] done synthesizing module 'control_unit_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/control_unit_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'pipeline_reg_id_ex_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_id_ex_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_reg_id_ex_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_id_ex_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'execute_stage_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/execute_stage_eye.sv:13]
+INFO: [Synth 8-6157] synthesizing module 'alu_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/alu_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'alu_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/alu_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'execute_stage_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/execute_stage_eye.sv:13]
+INFO: [Synth 8-6157] synthesizing module 'pipeline_reg_ex_mem_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_ex_mem_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_reg_ex_mem_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_ex_mem_eye.sv:12]
+INFO: [Synth 8-6157] synthesizing module 'memory_stage_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/memory_stage_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'memory_stage_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/memory_stage_eye.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'pipeline_reg_mem_wb_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_mem_wb_eye.sv:11]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline_reg_mem_wb_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/pipeline_reg_mem_wb_eye.sv:11]
+INFO: [Synth 8-6157] synthesizing module 'writeback_stage_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/writeback_stage_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'writeback_stage_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/writeback_stage_eye.sv:12]
+INFO: [Synth 8-6155] done synthesizing module 'risc_v_eye_top' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/risc_v_eye_top.sv:13]
+INFO: [Synth 8-6155] done synthesizing module 'system_top_eye' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/system_top_eye.sv:15]
+WARNING: [Synth 8-689] width (1) of port connection 'bram_data_write_enable_out' does not match port width (32) of module 'system_top_eye' [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/verilog_wrapper.v:37]
+INFO: [Synth 8-6155] done synthesizing module 'RISCV_EYE_CORE' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/verilog_wrapper.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_RISCV_EYE_CORE_0_1' (0#1) [/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.gen/sources_1/bd/design_1/ip/design_1_RISCV_EYE_CORE_0_1/synth/design_1_RISCV_EYE_CORE_0_1.v:53]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2045.938 ; gain = 501.766 ; free physical = 639 ; free virtual = 10542
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2063.750 ; gain = 519.578 ; free physical = 639 ; free virtual = 10541
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2063.750 ; gain = 519.578 ; free physical = 639 ; free virtual = 10541
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2063.750 ; gain = 0.000 ; free physical = 639 ; free virtual = 10541
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2186.488 ; gain = 0.000 ; free physical = 638 ; free virtual = 10541
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2186.488 ; gain = 0.000 ; free physical = 638 ; free virtual = 10540
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2186.488 ; gain = 642.316 ; free physical = 646 ; free virtual = 10548
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2194.492 ; gain = 650.320 ; free physical = 646 ; free virtual = 10548
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2194.492 ; gain = 650.320 ; free physical = 646 ; free virtual = 10548
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 2194.492 ; gain = 650.320 ; free physical = 645 ; free virtual = 10547
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 3     
+	   3 Input   32 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
++---Registers : 
+	               32 Bit    Registers := 47    
+	                5 Bit    Registers := 5     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 12    
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 19    
+	   4 Input   32 Bit        Muxes := 3     
+	   2 Input    5 Bit        Muxes := 5     
+	   8 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 43    
+	   7 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 2194.492 ; gain = 650.320 ; free physical = 604 ; free virtual = 10500
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 2217.492 ; gain = 673.320 ; free physical = 565 ; free virtual = 10460
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2218.492 ; gain = 674.320 ; free physical = 556 ; free virtual = 10451
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2241.508 ; gain = 697.336 ; free physical = 532 ; free virtual = 10428
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |    40|
+|2     |LUT1   |     2|
+|3     |LUT2   |   616|
+|4     |LUT3   |   235|
+|5     |LUT4   |   107|
+|6     |LUT5   |   225|
+|7     |LUT6   |   883|
+|8     |MUXF7  |   256|
+|9     |FDCE   |  1519|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.320 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 2398.320 ; gain = 731.410 ; free physical = 401 ; free virtual = 10297
+Synthesis Optimization Complete : Time (s): cpu = 00:00:26 ; elapsed = 00:00:26 . Memory (MB): peak = 2398.328 ; gain = 854.148 ; free physical = 401 ; free virtual = 10297
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2398.328 ; gain = 0.000 ; free physical = 554 ; free virtual = 10450
+INFO: [Netlist 29-17] Analyzing 296 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2454.348 ; gain = 0.000 ; free physical = 556 ; free virtual = 10452
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: b3f28a57
+INFO: [Common 17-83] Releasing license: Synthesis
+56 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:34 ; elapsed = 00:00:33 . Memory (MB): peak = 2454.348 ; gain = 1076.855 ; free physical = 556 ; free virtual = 10452
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1608.612; main = 1608.612; forked = 267.964
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3111.508; main = 2454.352; forked = 917.012
+INFO: [Coretcl 2-1174] Renamed 16 cell refs.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2478.359 ; gain = 0.000 ; free physical = 556 ; free virtual = 10451
+INFO: [Common 17-1381] The checkpoint '/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.runs/design_1_RISCV_EYE_CORE_0_1_synth_1/design_1_RISCV_EYE_CORE_0_1.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file design_1_RISCV_EYE_CORE_0_1_utilization_synth.rpt -pb design_1_RISCV_EYE_CORE_0_1_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Feb 14 15:29:20 2026...
