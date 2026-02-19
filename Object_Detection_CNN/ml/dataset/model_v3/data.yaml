@@ -1,0 +1,6 @@
+names:
+- apple
+nc: 1
+path: /content/drive/MyDrive/model_datasets/model_v3
+train: data/train/images
+val: data/valid/images
