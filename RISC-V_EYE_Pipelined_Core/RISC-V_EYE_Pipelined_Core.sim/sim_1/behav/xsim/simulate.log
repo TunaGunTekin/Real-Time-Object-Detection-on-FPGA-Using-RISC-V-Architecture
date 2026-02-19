@@ -1,2 +1,3 @@
 Time resolution is 1 ps
 --- Simülasyon Başladı: Reset bırakıldı ---
+$stop called at time : 325 ns : File "/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sim_1/new/system_top_tb.sv" Line 39

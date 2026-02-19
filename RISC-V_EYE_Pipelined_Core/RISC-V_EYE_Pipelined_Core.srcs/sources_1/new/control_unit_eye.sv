@@ -24,7 +24,6 @@ module control_unit_eye(
     //Memory Stage Control Signals
     output logic        mem_read_enable_out,
     output logic        mem_write_enable_out,
-    output logic [1:0]       mem_to_reg_select_out,
 
     //Write Back Stage Control Signals
     output logic        reg_write_enable_out,
@@ -45,7 +44,6 @@ module control_unit_eye(
         
         mem_read_enable_out      = 1'b0;
         mem_write_enable_out     = 1'b0;
-        mem_to_reg_select_out    = 2'b00;
         
         reg_write_enable_out     = 1'b0;
         result_source_select_out = 2'b00; // Default: ALU Result
@@ -160,14 +158,15 @@ module control_unit_eye(
             end
             
             `OP_LOAD: begin
-                case (funct3_in)
+                mem_read_enable_out = 1'b1;
+                alu_src_a_select_out = 1'b0; // Rs1
+                alu_src_b_select_out = 1'b1; // Immediate
+                imm_extend_op_select_out = 3'b000; // I-Type
+                alu_op_select_out = 4'b0000; // ADD operation for LB
+                reg_write_enable_out = 1'b1;
+                result_source_select_out = 2'b01; // ALU result
+                /* case (funct3_in)
                     `LOAD_LB: begin
-                        alu_src_a_select_out = 1'b0; // Rs1
-                        alu_src_b_select_out = 1'b1; // Immediate
-                        imm_extend_op_select_out = 3'b000; // I-Type
-                        alu_op_select_out = 4'b0000; // ADD operation for LB
-                        reg_write_enable_out = 1'b1;
-                        result_source_select_out = 2'b01; // ALU result
                         // Control signals for LB
                     end
                     `LOAD_LH: begin
@@ -193,9 +192,8 @@ module control_unit_eye(
                         alu_src_b_select_out = 1'b1; // Immediate
                         imm_extend_op_select_out = 3'b000; // I-Type
                         alu_op_select_out = 4'b0000; // ADD operation for LBU
-                        mem_read_enable_out = 1'b1;
                         reg_write_enable_out = 1'b1;
-                        result_source_select_out = 2'b01; // ALU result
+                        result_source_select_out = 2'b01; //Loaded Data
                         // Control signals for LBU
                     end
                     `LOAD_LHU: begin
@@ -205,25 +203,26 @@ module control_unit_eye(
                         alu_op_select_out = 4'b0000; // ADD operation for LHU
                         mem_read_enable_out = 1'b1;
                         reg_write_enable_out = 1'b1;
-                        result_source_select_out = 2'b01; // ALU result
+                        result_source_select_out = 2'b01; // Loaded Data
                         // Control signals for LHU
                     end
                     default: begin
                         // Default case
                     end
                 endcase
+                */
             end
             `OP_STORE: begin
+                mem_write_enable_out = 1'b1;
+                mem_read_enable_out = 1'b0;
                 case (funct3_in)
                     `STORE_SB: begin
                         alu_src_a_select_out = 1'b0; // Rs1
                         alu_src_b_select_out = 1'b0; // Rs2
                         imm_extend_op_select_out = 3'b000; // I-Type
                         alu_op_select_out = 4'b0000; // ADD operation for SB
-                        mem_write_enable_out = 1'b1;
-                        mem_read_enable_out = 1'b0;
                         reg_write_enable_out = 1'b0;
-                        result_source_select_out = 2'b11; // ALU result
+                        result_source_select_out = 2'b00; // ALU result
                         // Control signals for SB
                     end
                     `STORE_SH: begin
@@ -231,10 +230,8 @@ module control_unit_eye(
                         alu_src_b_select_out = 1'b0; // Rs2
                         imm_extend_op_select_out = 3'b000; // I-Type
                         alu_op_select_out = 4'b0000; // ADD operation for SH
-                        mem_write_enable_out = 1'b1;
-                        mem_read_enable_out = 1'b0;
                         reg_write_enable_out = 1'b0;
-                        result_source_select_out = 2'b11; // ALU result
+                        result_source_select_out = 2'b00; // ALU result
                         // Control signals for SH
                     end
                     `STORE_SW: begin
@@ -242,10 +239,8 @@ module control_unit_eye(
                         alu_src_b_select_out = 1'b0; // Rs2
                         imm_extend_op_select_out = 3'b000; // I-Type
                         alu_op_select_out = 4'b0000; // ADD operation for SW
-                        mem_write_enable_out = 1'b1;
-                        mem_read_enable_out = 1'b0;
                         reg_write_enable_out = 1'b0;
-                        result_source_select_out = 2'b11; // ALU result
+                        result_source_select_out = 2'b00; // ALU result
                         // Control signals for SW
                     end
                     default: begin
@@ -260,7 +255,7 @@ module control_unit_eye(
                 alu_src_b_select_out = 1'b0; // Rs2
                 imm_extend_op_select_out = 3'b000; // I type
                 reg_write_enable_out = 1'b1;
-                result_source_select_out = 2'b11; // ALU result
+                result_source_select_out = 2'b00; // ALU result
                 case ({funct7b5_in, funct3_in})
                     `ALU_ADD: begin
                         alu_op_select_out = 4'b0000; // ADD
@@ -311,7 +306,7 @@ module control_unit_eye(
                 alu_src_b_select_out = 1'b1; // Immediate
                 reg_write_enable_out = 1'b1;
                 imm_extend_op_select_out = 3'b000; // I type
-                result_source_select_out = 2'b11; // ALU result
+                result_source_select_out = 2'b00; // ALU result
                 case (funct3_in)
                     `ALU_ADDI: begin
                         alu_op_select_out = 4'b0000; // ADDI
@@ -366,7 +361,6 @@ module control_unit_eye(
         alu_src_a_select_out = 1'b0;
         alu_src_b_select_out = 1'b0;
         alu_op_select_out = 4'b0000;
-        mem_to_reg_select_out = 2'b00;
         is_jalr_out = 1'b0;
         mem_read_enable_out = 1'b0;
         mem_write_enable_out = 1'b0;

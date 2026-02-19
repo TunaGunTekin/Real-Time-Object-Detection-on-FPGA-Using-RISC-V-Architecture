@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-(* dont_touch = "true" *)
+//(* dont_touch = "true" *)
 module risc_v_eye_top(
     input logic                    clk,
     input logic                    reset,
@@ -86,7 +86,6 @@ module risc_v_eye_top(
     logic [3:0]                  alu_op_select_s_d;
     logic                        mem_read_enable_s_d;
     logic                        mem_write_enable_s_d;
-    logic [1:0]                  mem_to_reg_select_s_d;
     logic                        reg_write_enable_s_d;
     logic  [1:0]                 result_source_select_s_d;
     logic                        branch_enable_s_d;
@@ -113,7 +112,6 @@ module risc_v_eye_top(
     //ID-EX Register to EX-MEM Register
     logic                       mem_read_enable_s_e;
     logic                       mem_write_enable_s_e;
-    logic [1:0]                 mem_to_reg_select_s_e;
     logic                       reg_write_enable_s_e;
     logic [1:0]                 result_source_select_s_e;
     logic [`DATA_WIDTH-1:0]     pc_plus_four_s_e;
@@ -133,7 +131,6 @@ module risc_v_eye_top(
     // EX-MEM Register to Memory Stage
     logic                     mem_read_enable_m;
     logic                     mem_write_enable_m;
-    logic [1:0]               mem_to_reg_select_m;
     logic [1:0]               result_source_select_m;
     logic [`DATA_WIDTH-1:0]   alu_result_m;
     logic [`DATA_WIDTH-1:0]   write_data_m;
@@ -223,7 +220,7 @@ module risc_v_eye_top(
     .pc_current_out(pc_current_s_f),       // Current PC value
     .pc_plus_four_out(pc_plus_four_s_f)   // Current PC + 4 value (to be sent to Pipeline register)
     );
-    
+
     (* dont_touch = "true" *)
     pipeline_reg_if_id_eye if_id_register_inst (
         .clk(clk),
@@ -243,7 +240,7 @@ module risc_v_eye_top(
         .pc_current_out(pc_current_s_d),
         .pc_plus_four_out(pc_plus_four_s_d)
     );
-    
+
     (* dont_touch = "true" *)
     decode_stage_eye decode_stage_inst (
         .clk(clk),
@@ -275,7 +272,7 @@ module risc_v_eye_top(
         .funct3_out(funct3_s_d),
         .funct7b5_out(funct7b5_s_d)
     );
-    
+
     (* dont_touch = "true" *)
     control_unit_eye control_unit_inst (
         .opcode_in(opcode_s_d),
@@ -292,7 +289,6 @@ module risc_v_eye_top(
     //Memory Stage Control Signals
         .mem_read_enable_out(mem_read_enable_s_d),
         .mem_write_enable_out(mem_write_enable_s_d),
-        .mem_to_reg_select_out(mem_to_reg_select_s_d),
 
     //Write Back Stage Control Signals
         .reg_write_enable_out(reg_write_enable_s_d),
@@ -302,7 +298,7 @@ module risc_v_eye_top(
         .branch_enable_out(branch_enable_s_d),
         .jump_enable_out(jump_enable_s_d)
     );
-    
+
     (* dont_touch = "true" *)
     pipeline_reg_id_ex_eye id_ex_register_inst (
         .clk(clk),
@@ -329,7 +325,6 @@ module risc_v_eye_top(
         .alu_op_select_in(alu_op_select_s_d),
         .mem_read_enable_in(mem_read_enable_s_d),
         .mem_write_enable_in(mem_write_enable_s_d),
-        .mem_to_reg_select_in(mem_to_reg_select_s_d),
         .reg_write_enable_in(reg_write_enable_s_d),
         .branch_enable_in(branch_enable_s_d),
         .jump_enable_in(jump_enable_s_d),
@@ -352,7 +347,6 @@ module risc_v_eye_top(
 
         .mem_read_enable_out(mem_read_enable_s_e),
         .mem_write_enable_out(mem_write_enable_s_e),
-        .mem_to_reg_select_out(mem_to_reg_select_s_e),
         .reg_write_enable_out(reg_write_enable_s_e),
         .branch_enable_out(branch_enable_s_e),
         .jump_enable_out(jump_enable_s_e),
@@ -397,7 +391,6 @@ module risc_v_eye_top(
     //Inputs from EX Stage
         .mem_read_enable_in(mem_read_enable_s_e),
         .mem_write_enable_in(mem_write_enable_s_e),
-        .mem_to_reg_select_in(mem_to_reg_select_s_e),
         .reg_write_enable_in(reg_write_enable_s_e),
         .result_source_select_in(result_source_select_s_e),
         .alu_result_in(alu_result_s_e),
@@ -408,7 +401,6 @@ module risc_v_eye_top(
     //Outputs to MEM Stage
         .mem_read_enable_out(mem_read_enable_m),
         .mem_write_enable_out(mem_write_enable_m),
-        .mem_to_reg_select_out(mem_to_reg_select_m),
         .reg_write_enable_out(reg_write_enable_m),
         .result_source_select_out(result_source_select_m),
 
@@ -424,7 +416,6 @@ module risc_v_eye_top(
        //Inputs from EX-MEM Register
         .mem_read_enable_in(mem_read_enable_m),
         .mem_write_enable_in(mem_write_enable_m),
-        .mem_to_reg_select_in(mem_to_reg_select_m),
         .reg_write_enable_in(reg_write_enable_m),
         .result_source_select_in(result_source_select_m),
         .alu_result_in(alu_result_m),

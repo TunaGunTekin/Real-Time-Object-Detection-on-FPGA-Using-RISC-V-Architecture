@@ -1,7 +1,0 @@
-Running: xsim.dir/system_top_eye_behav/xsimk -simmode gui -wdb system_top_eye_behav.wdb -simrunnum 0 -socket 49401
-Design successfully loaded
-Design Loading Memory Usage: 180460 KB (Peak: 180516 KB)
-Design Loading CPU Usage: 1740 ms
-Simulation completed
-Simulation Memory Usage: 266556 KB (Peak: 319728 KB)
-Simulation CPU Usage: 1890 ms

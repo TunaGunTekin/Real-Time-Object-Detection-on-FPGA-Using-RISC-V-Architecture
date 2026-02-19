@@ -1,9 +1,31 @@
 Vivado Simulator v2024.2.0
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: /tools/Xilinx/Vivado/2024.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot system_top_tb_behav xil_defaultlib.system_top_tb xil_defaultlib.glbl -log elaborate.log 
+Running: /tools/Xilinx/Vivado/2024.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L xilinx_vip -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot system_top_tb_behav xil_defaultlib.system_top_tb xil_defaultlib.glbl -log elaborate.log 
 Using 8 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.hazard_unit_eye
+Compiling module xil_defaultlib.pc_eye
+Compiling module xil_defaultlib.pipeline_reg_if_id_eye
+Compiling module xil_defaultlib.register_file_eye
+Compiling module xil_defaultlib.immediate_extender_eye
+Compiling module xil_defaultlib.decode_stage_eye
+Compiling module xil_defaultlib.control_unit_eye
+Compiling module xil_defaultlib.pipeline_reg_id_ex_eye
+Compiling module xil_defaultlib.alu_eye
+Compiling module xil_defaultlib.execute_stage_eye
+Compiling module xil_defaultlib.pipeline_reg_ex_mem_eye
+Compiling module xil_defaultlib.memory_stage_eye
+Compiling module xil_defaultlib.pipeline_reg_mem_wb_eye
+Compiling module xil_defaultlib.writeback_stage_eye
+Compiling module xil_defaultlib.risc_v_eye_top
+Compiling module xil_defaultlib.bram_eye
+Compiling module xil_defaultlib.system_top_eye
+Compiling module xil_defaultlib.system_top_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot system_top_tb_behav

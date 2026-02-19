@@ -33,9 +33,8 @@ module system_top_tb;
         reset = 0;
         $display("--- Simülasyon Başladı: Reset bırakıldı ---");
 
-        // Simülasyonu belirli bir süre çalıştır (örneğin, 2000 ns)
-        #1000;
-        $display("--- Simülasyon Bitti: Zaman Aşıldı ---");
+        
+     #305;
 
         $stop; // Simülasyonu durdur
     end

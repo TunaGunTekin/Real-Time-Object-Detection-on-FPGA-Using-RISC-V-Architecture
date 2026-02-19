@@ -12,7 +12,6 @@ module memory_stage_eye(
     //Inputs from EX-MEM Register
     input logic                      mem_read_enable_in,
     input logic                      mem_write_enable_in,
-    input logic [1:0]                mem_to_reg_select_in,
     input logic                      reg_write_enable_in,
     input logic [1:0]                result_source_select_in,
 

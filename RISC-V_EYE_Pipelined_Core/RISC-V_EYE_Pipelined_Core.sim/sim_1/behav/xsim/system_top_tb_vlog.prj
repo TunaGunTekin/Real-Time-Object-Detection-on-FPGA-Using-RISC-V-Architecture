@@ -1,5 +1,5 @@
 # compile verilog/system verilog design source files
-sv xil_defaultlib  --include "../../../../RISC-V_EYE_Pipelined_Core.srcs/sources_1/new" \
+sv xil_defaultlib "/home/tuna-gun/GradProject/RISC-V_EYE/RISC-V_EYE_Pipelined_Core/RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/parameters.vh" --include "../../../../RISC-V_EYE_Pipelined_Core.srcs/sources_1/new" --include "../../../../RISC-V_EYE_Pipelined_Core.gen/sources_1/bd/design_1/ipshared/3cbc" --include "../../../../RISC-V_EYE_Pipelined_Core.gen/sources_1/bd/design_1/ipshared/ec67/hdl" --include "../../../../RISC-V_EYE_Pipelined_Core.gen/sources_1/bd/design_1/ipshared/86fe/hdl" --include "/tools/Xilinx/Vivado/2024.2/data/xilinx_vip/include" \
 "../../../../RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/alu_eye.sv" \
 "../../../../RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/bram_eye.sv" \
 "../../../../RISC-V_EYE_Pipelined_Core.srcs/sources_1/new/control_unit_eye.sv" \
