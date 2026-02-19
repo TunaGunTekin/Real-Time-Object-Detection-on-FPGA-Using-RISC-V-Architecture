@@ -1,8 +1,7 @@
-path: ./data
+path: ./data_new
 
 train: train/images
 val: valid/images
-test: test/images
 
 
 # Number of classes
